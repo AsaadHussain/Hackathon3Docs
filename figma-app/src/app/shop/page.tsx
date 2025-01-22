@@ -15,6 +15,8 @@ interface Product {
     tags: string[];
     stock_quantity: number;
     image_url: string;
+    rating: number;
+    slug: string;
 }
 
 export default function Shop() {

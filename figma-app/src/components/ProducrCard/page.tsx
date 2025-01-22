@@ -14,6 +14,8 @@ interface Product {
     tags: string[];
     stock_quantity: number;
     image_url: string;
+    rating: number;
+    slug: string;
 }
 
 interface CardProp {
@@ -29,7 +31,7 @@ export default function ProductCard({ product }: CardProp) {
                 className="flex items-center justify-evenly p-0 m-0 bg-white w-[285px] h-[375px] " >
                 <div className="flex flex-col justify-end items-start p-0 m-0">
                     <div className="flex items-center justify-center w-[280px] h-[280px] px-10 pb-12">
-                        <Link href={`/singleProduct/${product._id}`}><img className="object-cover w-[270px] h-auto" src={product.image_url} alt="" /></Link>
+                        <Link href={`/singleProduct/${product.slug}`}><img className="object-cover w-[270px] h-auto" src={product.image_url} alt="" /></Link>
                     </div>
                     <div className="p-0 m-0 poppins font-[400] text-[16px]">
                         <h2>

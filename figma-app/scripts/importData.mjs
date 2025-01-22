@@ -56,7 +56,7 @@ async function importData() {
         product_name: product.product_name,
         description: product.description,
         price: product.price,
-        priceAdiscount: product.priceAdiscount,
+        discount: product.discount,
         stock_quantity: product.stock_quantity,
         category: product.category,
         tags: product.tags,
@@ -68,6 +68,8 @@ async function importData() {
             _ref: imageRef,
           },
         } : undefined,
+        rating:product.rating,
+        slug:product.slug
       };
 
       await client.create(sanityProduct);

@@ -15,11 +15,13 @@ interface Product {
     tags: string[];
     stock_quantity: number;
     image_url: string;
+    rating: number;
+    slug: string;
 }
 
 export default async function Home() {
 
-    const products:Product[] = await getFourProducts()
+    const products: Product[] = await getFourProducts()
 
     return (
         <>

@@ -5,7 +5,7 @@ import ProductCard from "@/components/ProducrCard/page";
 import Modal from "../../../components/Modal";
 import Navbar from "../../../components/Navbar";
 import Link from "next/link";
-import { getFourProducts } from "../../../../scripts/fetchProducts";
+import { getAllProducts } from "../../../../scripts/fetchProducts";
 import CommentsSection from "@/components/Comment/page";
 
 interface Product {
@@ -18,15 +18,17 @@ interface Product {
     tags: string[];
     stock_quantity: number;
     image_url: string;
+    rating: number;
+    slug: string;
 }
 
 type singleProductProp = {
     params: {
-        _id: string
+        slug: string
     }
 }
 
-export default function SingleProduct({ params: { _id } }: singleProductProp) {
+export default function SingleProduct({ params: { slug } }: singleProductProp) {
 
     const [showModal, setShowModal] = useState(false);
     const [count, setCount] = useState(0);
@@ -36,7 +38,7 @@ export default function SingleProduct({ params: { _id } }: singleProductProp) {
 
     useEffect(() => {
         async function fetchProducts() {
-            const fetchedProducts = await getFourProducts();
+            const fetchedProducts = await getAllProducts();
             setProducts(fetchedProducts);
         }
         fetchProducts();
@@ -57,11 +59,12 @@ export default function SingleProduct({ params: { _id } }: singleProductProp) {
         setRating(value);
     };
 
-    const product = products?.values().find((b) => b._id === _id)
+    const product = products?.values().find((b) => b.slug === slug)
 
     if (!product) {
         return (
             <>
+                <Navbar isHome={false} />
                 <div className="flex items-center justify-center min-h-screen">
                     <h1 className="font-extrabold text-2xl text-red-500">Not Found </h1>
                 </div>
@@ -204,7 +207,7 @@ export default function SingleProduct({ params: { _id } }: singleProductProp) {
                 <hr className="my-8 bg-[#d9d9d9] w-5/6 h-[1.5px]" />
             </div>
 
-            <CommentsSection/>
+            <CommentsSection />
 
             <hr className="my-8 bg-[#d9d9d9] w-full h-[1.5px]" />
 
@@ -257,7 +260,7 @@ export default function SingleProduct({ params: { _id } }: singleProductProp) {
                 </div>
                 <div className="flex items-center justify-center pt-24 pb-3">
                     {
-                        products.map((product) => (
+                        products.slice(0,4).map((product) => (
                             <ProductCard key={product._id} product={product} />
                         ))
                     }

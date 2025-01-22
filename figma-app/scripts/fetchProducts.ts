@@ -11,7 +11,9 @@ export const getFourProducts = async () => {
     category,
     tags,
     stock_quantity,
-    "image_url":image.asset->url
+    "image_url":image.asset->url,
+      rating,
+    "slug":slug.current
 }`
     )
     return products
@@ -28,7 +30,9 @@ export const getAllProducts = async () => {
     category,
     tags,
     stock_quantity,
-    "image_url":image.asset->url
+    "image_url":image.asset->url,
+      rating,
+    "slug":slug.current
 }`
     )
     return products
